@@ -75,9 +75,11 @@ const App = (props) => {
 
   useEffect(()=> {
     openNotification(props.setBlurred, props.setNotificationShown)
+    props.setApolloData()
   }, props.notificationShown)
 
   document.title = "Auditorium - Учбова частина"
+
   return (
       <Dropdown overlay={menu} trigger={['contextMenu']}>
     <div>

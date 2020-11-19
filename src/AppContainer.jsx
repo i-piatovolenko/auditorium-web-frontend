@@ -1,6 +1,6 @@
 import React from 'react'
 import {connect} from "react-redux";
-import {setBlurred, setNotificationShown} from "./redux/auditoriumReducer";
+import {setBlurred, setNotificationShown, setApolloData} from "./redux/auditoriumReducer";
 import App from "./App";
 
 class AppContainer extends React.Component {
@@ -22,4 +22,4 @@ const mapStateToProp = (state) => {
     }
 }
 
-export default connect(mapStateToProp, {setBlurred, setNotificationShown})(App)
+export default connect(mapStateToProp, {setBlurred, setNotificationShown, setApolloData})(App)
