@@ -62,7 +62,12 @@ const Free = ({classroom, disabledButton}: any) => {
                 <Descriptions.Item label="Інструменти:">
                     {
                         <Descriptions size="small" bordered column={1}>
-                            <Descriptions.Item label="Піаніно:">Україна</Descriptions.Item>
+                            {classroom.instruments.map((instr:any)=> {
+                                return <Descriptions.Item label={instr.type}>
+                                    {instr.name + " — " + instr.rate}
+                                </Descriptions.Item>
+                            })}
+
                         </Descriptions>
                     }
                 </Descriptions.Item>

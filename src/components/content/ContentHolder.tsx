@@ -6,6 +6,10 @@ import {Route, Switch} from 'react-router-dom';
 import {useSelector} from "react-redux";
 import {Spin} from 'antd';
 import {LoadingOutlined} from '@ant-design/icons';
+import Home from "./home/Home";
+import Schedule from "./classrooms/schedule/Schedule";
+import Log from "./classrooms/log/Log";
+import Catalog from "./classrooms/catalog/Catalog";
 
 const {Content} = Layout;
 const antIcon = <LoadingOutlined style={{fontSize: 24}} spin/>;
@@ -32,6 +36,18 @@ const ContentHolder = () => {
                             </> : <Classrooms/>
                     }
 
+                </Route>
+                <Route exact path="/">
+                    <Home/>
+                </Route>
+                <Route path="/schedule">
+                    <Schedule/>
+                </Route>
+                <Route path="/log">
+                    <Log/>
+                </Route>
+                <Route path="/catalog">
+                    <Catalog/>
                 </Route>
             </Switch>
         </div>

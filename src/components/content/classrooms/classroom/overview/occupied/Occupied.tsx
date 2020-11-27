@@ -4,6 +4,8 @@ import styles from './occupied.module.css'
 
 const Occupied = ({classroom}: any) => {
 
+    let occupiedUntil = new Date(classroom.occupied.until);
+
     return <div className={styles.descriptionGrid}>
         <div>
             <Descriptions size="small" title="Інформація:" bordered column={1}>
@@ -15,7 +17,12 @@ const Occupied = ({classroom}: any) => {
                 <Descriptions.Item label="Інструменти:">
                     {
                         <Descriptions size="small" bordered column={1}>
-                            <Descriptions.Item label="Піаніно:">Україна</Descriptions.Item>
+                            {classroom.instruments.map((instr:any)=> {
+                                return <Descriptions.Item label={instr.type}>
+                                    {instr.name + " — " + instr.rate}
+                                </Descriptions.Item>
+                            })}
+
                         </Descriptions>
                     }
                 </Descriptions.Item>
@@ -23,7 +30,11 @@ const Occupied = ({classroom}: any) => {
         </div>
         <div>
             <Descriptions size="small" title="Зайнято:" bordered column={1}>
-                <Descriptions.Item label="До:">14:00</Descriptions.Item>
+                <Descriptions.Item label="До:">
+                    {
+                        occupiedUntil.getHours() + ":" + occupiedUntil.getMinutes()
+                    }
+                </Descriptions.Item>
                 <Descriptions.Item label="Ким:">
                     {
                         classroom.occupied.user.type + " | " +

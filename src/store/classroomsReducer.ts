@@ -94,6 +94,12 @@ export const fetchClassroomsTC = () => (dispatch: any) => {
                         }
                         until
                     }
+                    instruments {
+                        id
+                        type
+                        name
+                        rate
+                    }
                 }
             }
         `

@@ -33,24 +33,21 @@ const Sidebar = () => {
             }
         </div>
             <Router history={history}>
-        <Menu theme="light" defaultSelectedKeys={['1']} mode="inline">
+        <Menu theme="light" defaultSelectedKeys={['0']} mode="inline">
             <Menu.Item key="0" icon={<HomeOutlined/>}>
                 <NavLink to="/">Головна</NavLink>
             </Menu.Item>
             <Menu.Item key="1" icon={<TableOutlined/>}>
                 <NavLink to="/classrooms/">Аудиторії</NavLink>
             </Menu.Item>
-            <Menu.Item disabled key="2" icon={<ScheduleOutlined/>}>
+            <Menu.Item key="2" icon={<ScheduleOutlined/>}>
                 <NavLink to="/schedule">Розклад</NavLink>
             </Menu.Item>
-            <Menu.Item disabled key="3" icon={<FileExcelOutlined/>}>
+            <Menu.Item key="3" icon={<FileExcelOutlined/>}>
                 <NavLink to="/log">Журнал</NavLink>
             </Menu.Item>
-            <Menu.Item disabled key="4" icon={<IdcardOutlined style={{color: "#ff9203"}}/>}>
-                <NavLink to="/teachers">Педагоги</NavLink>
-            </Menu.Item>
-            <Menu.Item disabled key="5" icon={<AlignLeftOutlined style={{color: "#037dff"}}/>}>
-                <NavLink to="/students">Студенти</NavLink>
+            <Menu.Item key="4" icon={<IdcardOutlined/>}>
+                <NavLink to="/catalog">Каталог</NavLink>
             </Menu.Item>
             <Menu.Divider/>
             <Menu.Item disabled key="6" icon={<SettingOutlined/>}>
