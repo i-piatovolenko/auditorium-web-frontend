@@ -7,11 +7,13 @@ import FooterBar from "./components/FooterBar";
 import HeaderBar from "./components/HeaderBar";
 import 'antd/dist/antd.css';
 import ContentHolder from "./components/content/ContentHolder";
+import {fetchUsersTC} from "./store/usersReducer";
 
 const App = () => {
 
     const dispatch = useDispatch();
     dispatch(fetchClassroomsTC());
+    dispatch(fetchUsersTC());
 
     return <Layout style={{minHeight: '100vh'}}>
         <Sidebar />

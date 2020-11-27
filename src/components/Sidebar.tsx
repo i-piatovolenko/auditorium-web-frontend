@@ -38,7 +38,7 @@ const Sidebar = () => {
                 <NavLink to="/">Головна</NavLink>
             </Menu.Item>
             <Menu.Item key="1" icon={<TableOutlined/>}>
-                <NavLink to="/classrooms">Аудиторії</NavLink>
+                <NavLink to="/classrooms/">Аудиторії</NavLink>
             </Menu.Item>
             <Menu.Item disabled key="2" icon={<ScheduleOutlined/>}>
                 <NavLink to="/schedule">Розклад</NavLink>

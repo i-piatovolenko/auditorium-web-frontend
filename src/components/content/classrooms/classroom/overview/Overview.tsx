@@ -1,1 +1,95 @@
-import React from 'react';import {Button, Descriptions, Modal} from 'antd';import {useParams} from 'react-router-dom';import styles from './overview.module.css';import {gql, useMutation} from '@apollo/client';const FREE_CLASSROOM = gql`    mutation free($input: FreeClassroomInput!){        freeClassroom(input: $input) {            classroom {                name                occupied {                    user {                        id                    }                }            }            userErrors {                message                code            }        }    }`;const Overview = (props: any) => {    const [freeClassroom] = useMutation(FREE_CLASSROOM);    let classroom = props.classroom;    let isOccupied = props.isOccupied;    // @ts-ignore    let {name} = useParams();    let footerButtonOk = isOccupied ? <Button key="submit" type="primary" danger onClick={() => {        freeClassroom({ variables: {                "input": {                    "classroomName": String(classroom.name)                }            } }).then(r => console.log(r))    }    }>        Звільнити аудиторію    </Button> : <Button key="submit" type="primary" onClick={() => {    }}>        Записати в аудиторію    </Button>;    return <Modal        title={"Аудиторія №" + name}        visible={props.visible}        footer={[            <Button key="back" onClick={() => {            }}>                Закрити            </Button>,            footerButtonOk,        ]}    >        <Descriptions title="Інформація:" bordered column={1}>            <Descriptions.Item label="Статус:">{isOccupied ? "Зайнято" : "Вільно"}</Descriptions.Item>            {isOccupied ?                <><Descriptions.Item label="Власник:">{classroom.occupied.user.type}</Descriptions.Item>                    <Descriptions.Item label="Ф.І.О.:">{                        classroom.occupied.user.firstName + " " + classroom.occupied.user.lastName                    }</Descriptions.Item>                    <Descriptions.Item label="Тел.:">Немає</Descriptions.Item></>                : ""}            <Descriptions.Item                label="Спец. аудиторія:">{classroom.special ? classroom.special : "Ні"}</Descriptions.Item>            <Descriptions.Item label="Кафедра:">{classroom.chair ? classroom.chair : "Немає"}</Descriptions.Item>            <Descriptions.Item label="Опис:">{classroom.description}</Descriptions.Item>        </Descriptions>    </Modal>};export default Overview;
+import React, {useEffect, useState} from 'react';
+import {Button, Descriptions, Modal} from 'antd';
+import {useParams} from 'react-router-dom';
+import styles from './overview.module.css';
+import {useDispatch} from "react-redux";
+import {fetchClassroomsTC, freeClassroomAC} from "../../../../../store/classroomsReducer";
+import {gql, useMutation} from "@apollo/client";
+import Occupied from "./occupied/Occupied";
+import Free from "./free/Free";
+
+const Overview = (props: any) => {
+
+
+    let [visible, setVisible] = useState(true)
+
+    let showModal = () => {
+        setVisible(true)
+    };
+
+    let handleOk = () => {
+        setVisible(false)
+    };
+
+    let handleCancel = () => {
+        setVisible(false)
+    };
+
+    const FREE_CLASSROOM = gql`
+        mutation free($input: FreeClassroomInput!){
+            freeClassroom(input: $input) {
+                classroom {
+                    name
+                    occupied {
+                        user {
+                            id
+                        }
+                    }
+                }
+                userErrors {
+                    message
+                    code
+                }
+            }
+        }
+    `;
+    const [freeClassroom, {loading, error, data}] = useMutation(FREE_CLASSROOM);
+    const dispatch = useDispatch();
+    // @ts-ignore
+    let {name} = useParams();
+    let classroom = props.classroom;
+    let isOccupied = props.isOccupied;
+    let footerButtonOk = isOccupied ? <><Button key="submit" type="primary" onClick={() => {
+    }}>
+        Передати аудиторію
+    </Button><Button key="submit" type="primary" danger onClick={() => {
+        freeClassroom({
+            variables: {
+                "input": {
+                    "classroomName": name
+                }
+            }
+        }).then(r => {
+            dispatch(fetchClassroomsTC);
+            dispatch(freeClassroomAC(classroom.name))
+        });
+    }
+    }>
+        Звільнити аудиторію
+    </Button></> : <Button key="submit" type="primary" onClick={() => {
+    }}>
+        Записати в аудиторію
+    </Button>;
+
+    return <Modal
+        title={"Аудиторія №" + name}
+        visible={visible}
+        onOk={handleOk}
+        onCancel={handleCancel}
+        footer={[
+            <Button key="back" onClick={() => {
+            }}>
+                Закрити
+            </Button>,
+            footerButtonOk,
+        ]}
+    >
+        {
+            isOccupied ?
+                <Occupied isOccupied={isOccupied} classroom={classroom}/> :
+                <Free isOccupied={isOccupied} classroom={classroom}/>
+        }
+    </Modal>
+};
+
+export default Overview;
