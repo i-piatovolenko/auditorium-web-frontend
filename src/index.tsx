@@ -5,13 +5,9 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import {Provider} from "react-redux";
 import store from "./store/store";
-import {ApolloClient, ApolloProvider, InMemoryCache} from '@apollo/client';
+import {ApolloProvider} from '@apollo/client';
 import {BrowserRouter} from "react-router-dom";
-
-export const client = new ApolloClient({
-    uri: 'http://localhost:4000/',
-    cache: new InMemoryCache()
-});
+import {client} from "./api/client";
 
 document.title = "Auditorium"
 

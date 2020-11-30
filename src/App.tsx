@@ -10,7 +10,7 @@ import ContentHolder from "./components/content/ContentHolder";
 import {fetchUsersTC} from "./store/usersReducer";
 
 const App = () => {
-
+    
     const dispatch = useDispatch();
     dispatch(fetchClassroomsTC());
     dispatch(fetchUsersTC());

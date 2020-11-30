@@ -1,0 +1,1 @@
+import React from 'react';import {Collapse} from "antd";const {Panel} = Collapse;const Filters = () => {    return <Collapse defaultActiveKey={['1']} style={{marginBottom: 10}}>        <Panel header="Фільтри" key="1">            <p>text</p>        </Panel>    </Collapse>}export default Filters

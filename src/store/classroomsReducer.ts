@@ -1,5 +1,4 @@
-import {gql} from '@apollo/client';
-import {client} from "../index";
+import {getClassrooms} from "../api/queries";
 
 const SET_FETCHED_CLASSROOMS = 'SET_FETCHED_CLASSROOMS';
 const FREE_CLASSROOM = 'FREE_CLASSROOM';
@@ -41,7 +40,8 @@ const initialState = {
 
 let classroomsReducer = (state = initialState, action: any): any => {
     switch (action.type) {
-        case SET_FETCHED_CLASSROOMS: return {...state, classrooms: action.classrooms};
+        case SET_FETCHED_CLASSROOMS:
+            return {...state, classrooms: action.classrooms};
         case FREE_CLASSROOM: {
             let classroomsUpdated = state.classrooms.map(cl => {
                 if (cl.name === action.name) {
@@ -62,62 +62,27 @@ let classroomsReducer = (state = initialState, action: any): any => {
             });
             return {...state, classrooms: classroomsOccupied}
         }
-        case SET_USER_ID_VALUE: return {...state, userIdValue: action.value};
-        case SET_UNTIL_VALUE: return {...state, untilValue: action.value};
-        case SET_IS_FETCHING: return {...state, isFetching: action.value};
-        case SET_DISABLED_BUTTON: return {...state, disabledButton: action.value};
+        case SET_USER_ID_VALUE:
+            return {...state, userIdValue: action.value};
+        case SET_UNTIL_VALUE:
+            return {...state, untilValue: action.value};
+        case SET_IS_FETCHING:
+            return {...state, isFetching: action.value};
+        case SET_DISABLED_BUTTON:
+            return {...state, disabledButton: action.value};
         default:
             return state;
-    };
+    }
+    ;
 };
 
 export const setFetchedClassroomsAC = (classrooms: any) => ({type: SET_FETCHED_CLASSROOMS, classrooms})
-export const fetchClassroomsTC = () => (dispatch: any) => {
+export const fetchClassroomsTC = () => async (dispatch: any) => {
     dispatch(setIsFetchingAC(true))
-    //Handle error!!!
-    client
-    .query({
-        query: gql`
-            query {
-                classrooms {
-                    id
-                    name
-                    chair
-                    special
-                    isWing
-                    description
-                    occupied {
-                        user {
-                            firstName
-                            lastName
-                            type
-                        }
-                        until
-                    }
-                    instruments {
-                        id
-                        type
-                        name
-                        rate
-                    }
-                    schedule(date: "2020-12-17T03:24:00") {
-                        user {
-                            lastName
-                        }
-                        from
-                        to
-                        activity
-                    }
-                }
-            }
-        `
-    })
-    .then(result => {
-        dispatch(setFetchedClassroomsAC(result.data.classrooms));
-        dispatch(setIsFetchingAC(false));
-    });
+    let classrooms = await getClassrooms();
+    dispatch(setFetchedClassroomsAC(classrooms.data.classrooms));
+    dispatch(setIsFetchingAC(false));
 };
-
 export const freeClassroomAC = (name: any) => ({type: FREE_CLASSROOM, name});
 export const occupyClassroomAC = (occupied: any, name: any) => ({type: OCCUPY_CLASSROOM, name, occupied});
 export const setUserIdValueAC = (value: any) => ({type: SET_USER_ID_VALUE, value});

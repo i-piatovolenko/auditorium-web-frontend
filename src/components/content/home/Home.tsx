@@ -2,6 +2,7 @@ import React from 'react';
 import { UsergroupAddOutlined, TableOutlined, CheckCircleOutlined } from '@ant-design/icons';
 import { Statistic, Row, Col } from 'antd';
 import {useSelector} from "react-redux";
+import Authorisation from "./authorisation/Authorisation";
 
 const Home = () => {
     // @ts-ignore
@@ -27,6 +28,7 @@ const Home = () => {
                 <Statistic title="Вільні аудиторії" value={freeClassroomsCount} prefix={<CheckCircleOutlined />} />
             </Col>
         </Row>
+        <Authorisation/>
     </>
 }
 export default Home;
