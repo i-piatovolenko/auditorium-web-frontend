@@ -100,6 +100,14 @@ export const fetchClassroomsTC = () => (dispatch: any) => {
                         name
                         rate
                     }
+                    schedule(date: "2020-12-17T03:24:00") {
+                        user {
+                            lastName
+                        }
+                        from
+                        to
+                        activity
+                    }
                 }
             }
         `

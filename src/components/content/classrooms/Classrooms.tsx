@@ -6,7 +6,6 @@ import Classroom from "./classroom/Classroom";
 const Classrooms = () => {
     // @ts-ignore
     let classrooms = useSelector(state=>state.classroomsReducer.classrooms)
-
     return <div className={styles.classroomsGrid}>
         {classrooms.map((classroom: any)=><Classroom key={classroom.id} classroom = {classroom}/>)}
     </div>
