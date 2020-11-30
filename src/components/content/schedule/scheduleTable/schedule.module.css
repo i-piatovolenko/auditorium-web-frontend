@@ -1,0 +1,74 @@
+.scheduleTable {
+    overflow: auto;
+}
+
+.scheduleTable th, .scheduleTable td {
+    margin: 0;
+}
+
+.tg {
+    border-collapse: collapse;
+    border-spacing: 0;
+
+}
+
+th {
+    padding: 2px;
+    background-color: #5093fc;
+    border: 1px solid white;
+}
+
+thead {
+    border: 1px solid white;
+    color: #fff;
+}
+
+.tg td {
+    border-color: #c0d3ff;
+    border-style: solid;
+    border-width: 1px;
+    font-family: Arial, sans-serif;
+    font-size: 14px;
+    overflow: hidden;
+    word-break: normal;
+
+}
+
+.tg th {
+    border-color: #9db9ff;
+    border-style: solid;
+    border-width: 1px;
+    font-family: Arial, sans-serif;
+    font-size: 14px;
+    font-weight: normal;
+    overflow: hidden;
+    word-break: normal;
+}
+
+.tg .tg_0pky {
+    border-color: inherit;
+    text-align: left;
+    vertical-align: top
+}
+
+.tg .tg_0lax {
+    text-align: left;
+    vertical-align: top
+}
+
+.occupied {
+    background-color: #5eea5e;
+    width: 100%;
+    height: 100%;
+}
+
+.occupied p {
+    color: white;
+   padding: 5px;
+    margin: 0;
+}
+
+.occupied:hover {
+    background-color: #479547;
+    cursor: pointer;
+}

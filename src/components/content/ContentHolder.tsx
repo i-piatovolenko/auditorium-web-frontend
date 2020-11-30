@@ -7,9 +7,9 @@ import {useSelector} from "react-redux";
 import {Spin} from 'antd';
 import {LoadingOutlined} from '@ant-design/icons';
 import Home from "./home/Home";
-import Schedule from "./classrooms/schedule/Schedule";
-import Log from "./classrooms/log/Log";
-import Catalog from "./classrooms/catalog/Catalog";
+import Schedule from "./schedule/Schedule";
+import Log from "./log/Log";
+import Catalog from "./catalog/Catalog";
 
 const {Content} = Layout;
 const antIcon = <LoadingOutlined style={{fontSize: 24}} spin/>;
