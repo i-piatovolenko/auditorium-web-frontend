@@ -58,4 +58,23 @@ export const getUsers = () => {
         `
     })
 }
-
+export const getRegister = (date:string) => {
+    return client
+        .query({
+            query: gql`
+    query {
+        register(date: "01.12.2020") {
+            id
+            user {
+                lastName
+            }
+            classroom {
+                name
+            }
+            start
+            end
+        }
+    }
+    `
+        })
+};

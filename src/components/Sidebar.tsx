@@ -44,7 +44,7 @@ const Sidebar = () => {
                 <NavLink to="/schedule">Розклад</NavLink>
             </Menu.Item>
             <Menu.Item key="3" icon={<FileExcelOutlined/>}>
-                <NavLink to="/log">Журнал</NavLink>
+                <NavLink to="/register">Журнал</NavLink>
             </Menu.Item>
             <Menu.Item key="4" icon={<IdcardOutlined/>}>
                 <NavLink to="/catalog">Каталог</NavLink>

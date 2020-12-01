@@ -8,7 +8,7 @@ import {Spin} from 'antd';
 import {LoadingOutlined} from '@ant-design/icons';
 import Home from "./home/Home";
 import Schedule from "./schedule/Schedule";
-import Log from "./log/Log";
+import Log from "./register/Register";
 import Catalog from "./catalog/Catalog";
 
 const {Content} = Layout;
@@ -43,7 +43,7 @@ const ContentHolder = () => {
                 <Route path="/schedule">
                     <Schedule/>
                 </Route>
-                <Route path="/log">
+                <Route path="/register">
                     <Log/>
                 </Route>
                 <Route path="/catalog">

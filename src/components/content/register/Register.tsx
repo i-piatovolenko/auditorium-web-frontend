@@ -1,19 +1,26 @@
-import React, {useState} from 'react';
-import {useSelector} from "react-redux";
+import React, {useEffect, useState} from 'react';
+import {useDispatch, useSelector} from "react-redux";
 import {Button, DatePicker, Divider, Input, Space, Table} from "antd";
 import Highlighter from "react-highlight-words";
 import {SearchOutlined} from "@ant-design/icons/lib";
-
-const log = [{key: 0,
-    name: "User Name",
-    from: "9:00",
-    to: "15:00"}]
+import {fetchRegistersTC} from "../../../store/registerReducer";
 
 const Log = () => {
 
     let [searchText, setSearchText] = useState('');
     let [searchedColumn, setSearchedColumn] = useState('');
     let searchInput: any;
+    const dispatch = useDispatch();
+    useEffect(()=>{
+        dispatch(fetchRegistersTC());
+    })
+    // @ts-ignore
+    let register = useSelector(state=>state.registerReducer.register).map(el=>({
+        key: el.id,
+        name: el.user.lastName,
+        from: new Date(el.start).getHours() + ":" + (new Date(el.start).getMinutes()<10?'0':'') + new Date(el.start).getMinutes(),
+        to: el.end===null?"":new Date(el.end).getHours() + ":" + (new Date(el.end).getMinutes()<10?'0':'') + new Date(el.end).getMinutes()
+    }));
     let getColumnSearchProps = (dataIndex:any)=> ({
         // @ts-ignore
         filterDropdown: ({ setSelectedKeys, selectedKeys, confirm, clearFilters }) => (
@@ -109,7 +116,7 @@ const Log = () => {
         <DatePicker onChange={()=>{}} style={{
         marginBottom: "10px"}
         }/>
-        <Table columns={columns} dataSource={log} />;
+        <Table columns={columns} dataSource={register} />;
     </>
 }
 export default Log;
