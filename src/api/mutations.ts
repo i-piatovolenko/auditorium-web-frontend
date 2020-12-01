@@ -42,3 +42,37 @@ export const FREE_CLASSROOM = gql`
         }
     }
 `;
+
+export const SIGN_UP = gql`
+mutation signup($input: SignupInput!) {
+    signup(input: $input) {
+        token
+        user {
+            id
+            lastName
+        }
+        userErrors {
+            message
+            code
+        }
+    }
+}
+`;
+export const LOGIN = gql`
+mutation login($input: LoginInput!) {
+    login(input: $input) {
+        token
+        user {
+            id
+            firstName
+            patronymic
+            lastName
+            type
+        }
+        userErrors {
+            message
+            code
+        }
+    }
+}
+`;

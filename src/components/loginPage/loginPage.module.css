@@ -1,0 +1,32 @@
+.loginPage {
+    display: grid;
+    width: 100vw;
+    height: 100vh;
+    position: fixed;
+    z-index: 900;
+    grid-template-columns: repeat(4, 1fr);
+    grid-gap: 10px;
+    grid-auto-rows: 200px;
+    grid-template-areas:
+            ". a a ."
+            ". a a .";
+    background: linear-gradient(225deg, #1b2194, #013d4b, #013572);
+    background-size: 200% 200%;
+    animation: splashGradient 10s ease infinite;
+}
+
+@keyframes splashGradient {
+    0%{background-position:96% 0%}
+    50%{background-position:5% 100%}
+    100%{background-position:96% 0%}
+}
+
+.form {
+    grid-area: a;
+    align-self: center;
+    justify-self: center;
+    background-color: #f3f3f3;
+    padding: 25px;
+    border-radius: 10px;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
+}
