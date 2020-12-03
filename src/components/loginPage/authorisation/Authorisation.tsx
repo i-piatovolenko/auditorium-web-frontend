@@ -4,9 +4,9 @@ import {LockOutlined, UserOutlined} from "@ant-design/icons/lib";
 import Registration from "../registration/Registration";
 import styles from "./authorisation.module.css";
 import {useMutation} from "@apollo/client";
-import {LOGIN} from "../../../../api/mutations";
+import {LOGIN} from "../../../api/mutations";
 import {useDispatch} from "react-redux";
-import {setLoggedAC} from "../../../../store/authReducer";
+import {setIsLogged} from "../../../store/actions";
 import { message } from 'antd';
 
 const layout = {
@@ -49,7 +49,7 @@ const Authorisation = () => {
                 error(r.data.login.userErrors[0].message);
 
             } else {
-                dispatch(setLoggedAC(true));
+                dispatch(setIsLogged(true));
                 success();
                 console.log(r)
             }

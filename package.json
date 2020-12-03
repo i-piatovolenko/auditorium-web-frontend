@@ -58,6 +58,7 @@
     "@types/react-highlight-words": "^0.16.1",
     "@types/react-redux": "^7.1.11",
     "@types/react-router-dom": "^5.1.6",
+    "prettier": "2.2.1",
     "sass": "^1.29.0"
   }
 }

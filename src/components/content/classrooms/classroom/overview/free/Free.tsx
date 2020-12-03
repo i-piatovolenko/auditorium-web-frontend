@@ -1,14 +1,20 @@
 import React from 'react';
-import {Alert, AutoComplete, Button, Descriptions, Select, Slider, Space} from "antd";
+import {
+    Alert,
+    AutoComplete,
+    Descriptions,
+    Select,
+    Slider,
+    Space
+} from "antd";
 import {useDispatch, useSelector} from "react-redux";
 import styles from './free.module.css';
-import {gql, useMutation} from "@apollo/client";
 import {
     occupyClassroomAC,
-    setDisabledButtonAC,
-    setUntilValueAC,
-    setUserIdValueAC
-} from "../../../../../../store/classroomsReducer";
+    setDisabledButton,
+    setUntilValue,
+    setUserIdValue
+} from "../../../../../../store/actions";
 
 const Free = ({classroom, disabledButton}: any) => {
     const dispatch = useDispatch();
@@ -62,7 +68,7 @@ const Free = ({classroom, disabledButton}: any) => {
                 <Descriptions.Item label="Інструменти:">
                     {
                         <Descriptions size="small" bordered column={1}>
-                            {classroom.instruments.map((instr:any)=> {
+                            {classroom.instruments.map((instr: any) => {
                                 return <Descriptions.Item label={instr.type}>
                                     {instr.name + " — " + instr.rate}
                                 </Descriptions.Item>
@@ -81,7 +87,7 @@ const Free = ({classroom, disabledButton}: any) => {
             }} direction="vertical" size="small">
                 {
                     disabledButton ?
-                    <Alert message="Виберіть користувача" type="error"/> : ""
+                        <Alert message="Виберіть користувача" type="error"/> : ""
                 }
                 <AutoComplete
                     style={{
@@ -94,8 +100,8 @@ const Free = ({classroom, disabledButton}: any) => {
                         option.value.toUpperCase().indexOf(inputValue.toUpperCase()) !== -1
                     }
                     onSelect={(v: any, o: any) => {
-                        dispatch(setUserIdValueAC(Number(o.id)));
-                        dispatch(setDisabledButtonAC(false));
+                        dispatch(setUserIdValue(Number(o.id)));
+                        dispatch(setDisabledButton(false));
                     }}
                 />
                 {/*<Select defaultValue="STUDENT" style={{ width: 120 }} onChange={()=>{}}>*/}
@@ -108,13 +114,13 @@ const Free = ({classroom, disabledButton}: any) => {
                 {/*</Select>*/}
                 <p>Вкажіть термін перебування в аудиторії:</p>
             </Space>
-                <Slider
-                    defaultValue={4}
-                    marks={marks}
-                    min={1}
-                    max={12}
-                    tipFormatter={formatter}
-                    onChange={(value: any) => dispatch(setUntilValueAC(900000 * value))}/>
+            <Slider
+                defaultValue={4}
+                marks={marks}
+                min={1}
+                max={12}
+                tipFormatter={formatter}
+                onChange={(value: any) => dispatch(setUntilValue(900000 * value))}/>
 
         </div>
     </div>

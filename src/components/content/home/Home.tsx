@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import { UsergroupAddOutlined, TableOutlined, CheckCircleOutlined } from '@ant-design/icons';
-import {Statistic, Row, Col, Button, Modal} from 'antd';
+import {Statistic, Row, Col} from 'antd';
 import {useSelector} from "react-redux";
 
 const Home = () => {

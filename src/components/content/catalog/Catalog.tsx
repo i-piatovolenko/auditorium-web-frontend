@@ -84,7 +84,7 @@ const Catalog = () => {
 
         const columns = [
             {
-                title: 'Ф.І.О.',
+                title: 'П.І.Б.',
                 dataIndex: 'name',
                 key: 'name',
                 width: '30%',

@@ -1,11 +1,16 @@
-import {applyMiddleware, combineReducers, createStore} from "redux";
+import { applyMiddleware, combineReducers, createStore } from "redux";
 import thunk from "redux-thunk";
-import classroomsReducer from "./classroomsReducer";
-import usersReducer from "./usersReducer";
-import authReducer from "./authReducer";
-import registerReducer from "./registerReducer";
+import classrooms from "./reducers/classrooms";
+import users from "./reducers/users";
+import auth from "./reducers/auth";
+import register from "./reducers/register";
 
-let reducers = combineReducers({classroomsReducer, usersReducer, authReducer, registerReducer});
-let store = createStore(reducers,applyMiddleware(thunk));
+let reducers = combineReducers({
+  classroomsReducer: classrooms,
+  usersReducer: users,
+  authReducer: auth,
+  registerReducer: register,
+});
+let store = createStore(reducers, applyMiddleware(thunk));
 
 export default store;

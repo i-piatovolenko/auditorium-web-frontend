@@ -1,12 +1,12 @@
 import React, {useEffect, useState} from 'react';
 import {Button, Descriptions, Modal} from 'antd';
 import {useParams} from 'react-router-dom';
-import styles from './overview.module.css';
 import {useDispatch} from "react-redux";
-import {fetchClassroomsTC, freeClassroomAC} from "../../../../../store/classroomsReducer";
+import {freeClassroomAC} from "../../../../../store/actions";
 import {gql, useMutation} from "@apollo/client";
 import Occupied from "./occupied/Occupied";
 import Free from "./free/Free";
+import {fetchClassroomsTC} from "../../../../../store/effects";
 
 const Overview = (props: any) => {
 
@@ -61,7 +61,7 @@ const Overview = (props: any) => {
             }
         }).then(r => {
             dispatch(fetchClassroomsTC);
-            dispatch(freeClassroomAC(classroom.name))
+            dispatch(freeClassroom(classroom.name))
         });
     }
     }>
