@@ -8,7 +8,7 @@ import Occupied from "./occupied/Occupied";
 import Free from "./free/Free";
 import {fetchClassroomsTC} from "../../../../../store/effects";
 
-const Overview = (props: any) => {
+const Expanded = (props: any) => {
 
 
     let [visible, setVisible] = useState(true)
@@ -92,4 +92,4 @@ const Overview = (props: any) => {
     </Modal>
 };
 
-export default Overview;
+export default Expanded;

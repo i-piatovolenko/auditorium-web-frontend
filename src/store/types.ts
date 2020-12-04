@@ -10,6 +10,8 @@ import {
   SET_USER_ID_VALUE,
   SET_USERS,
 } from "./actions";
+import {ThunkAction} from "redux-thunk";
+import {Action} from "redux";
 
 export enum userTypes {
   STUDENT = "STUDENT",
