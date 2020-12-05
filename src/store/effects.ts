@@ -10,7 +10,7 @@ export const fetchClassroomsTC = () => async (dispatch: any) => {
   dispatch(setIsFetching(false));
 };
 
-//auth
+//register
 
 export const fetchRegistersTC = () => async (dispatch: any) => {
   let register = await getRegister(String(new Date()));

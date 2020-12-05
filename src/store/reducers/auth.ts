@@ -1,17 +1,13 @@
-import { SET_IS_LOGGED } from "../actions";
-import {AuthActions, Me, userTypes} from "../types";
+import { SET_IS_LOGGED, SET_LOGIN_DATA } from "../actions";
+import { AuthActions, Me, userTypes } from "../types";
 
 const initialState: Me = {
   id: 0,
   token: "",
-  email: "",
-  password: "",
-  firstName: "",
+  firstName: "Ivan",
   patronymic: "",
-  lastName: "",
+  lastName: "John",
   type: userTypes.OTHER,
-  phoneNumber: "",
-  extraPhoneNumbers: "",
   department: "",
   isLogged: false,
 };
@@ -20,6 +16,18 @@ const auth = (state = initialState, action: AuthActions): Me => {
   switch (action.type) {
     case SET_IS_LOGGED: {
       return { ...state, isLogged: action.isLogged };
+    }
+    case SET_LOGIN_DATA: {
+      return {
+        ...state,
+        id: action.data.id,
+        token: action.data.token,
+        firstName: action.data.firstName,
+        patronymic: action.data.patronymic,
+        lastName: action.data.lastName,
+        type: action.data.type,
+        department: action.data.department,
+      };
     }
     default:
       return state;

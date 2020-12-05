@@ -1,0 +1,12 @@
+.filters {
+    border: 1px solid rgba(0, 0, 0, 0);
+    border-radius: 10px;
+    margin-bottom: 10px;
+    transition: all .3s ease-out;
+}
+
+.filters:hover {
+    border: 1px solid rgba(0, 0, 0, .1);
+    border-radius: 10px;
+    background-color: rgba(255, 255, 255, .5);
+}

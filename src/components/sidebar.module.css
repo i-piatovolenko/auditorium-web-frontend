@@ -1,0 +1,12 @@
+.profileCard {
+    max-height: 500px;
+    transition: all 0.25s ease-in;
+    opacity: 1;
+}
+
+.profileCardCollapsed {
+    max-height: 0;
+    transition: all 0.15s ease-out;
+    overflow: hidden;
+    opacity: 0;
+}

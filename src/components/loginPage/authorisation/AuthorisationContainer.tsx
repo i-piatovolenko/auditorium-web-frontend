@@ -2,7 +2,7 @@ import React from "react";
 import { useMutation } from "@apollo/client";
 import { LOGIN } from "../../../api/mutations";
 import { useDispatch } from "react-redux";
-import { setIsLogged } from "../../../store/actions";
+import { setIsLogged, setLoginData } from "../../../store/actions";
 import { message } from "antd";
 import Authorisation from "./Authorisation";
 
@@ -29,6 +29,13 @@ const AuthorisationContainer = () => {
       error(result.data.login.userErrors[0].message);
     } else {
       dispatch(setIsLogged(true));
+      console.log(result.data.login.user)
+      dispatch(
+        setLoginData({
+          token: result.data.login.user,
+          ...result.data.login.user,
+        })
+      );
       success();
     }
   };

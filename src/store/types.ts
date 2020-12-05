@@ -2,16 +2,16 @@ import {
   FREE_CLASSROOM,
   OCCUPY_CLASSROOM,
   SET_CLASSROOMS,
+  SET_CLASSROOMS_FILTER,
   SET_DISABLED_BUTTON,
   SET_IS_FETCHING,
   SET_IS_LOGGED,
+  SET_LOGIN_DATA,
   SET_REGISTER,
   SET_UNTIL_VALUE,
   SET_USER_ID_VALUE,
   SET_USERS,
 } from "./actions";
-import {ThunkAction} from "redux-thunk";
-import {Action} from "redux";
 
 export enum userTypes {
   STUDENT = "STUDENT",
@@ -34,10 +34,6 @@ export interface User {
 
 export interface Me extends User {
   token: string;
-  email: string;
-  password: string;
-  phoneNumber: string;
-  extraPhoneNumbers?: string;
   isLogged: boolean;
 }
 export interface Occupied {
@@ -94,6 +90,7 @@ export interface ClassroomsState {
   untilValue: number;
   isFetching: boolean;
   disabledButton: boolean;
+  classroomsFilter: string;
 }
 
 //Actions
@@ -110,7 +107,12 @@ export type SetIsLoggedAction = {
   isLogged: boolean;
 };
 
-export type AuthActions = SetIsLoggedAction;
+export type SetLoginDataAction = {
+  type: typeof SET_LOGIN_DATA;
+  data: Me;
+};
+
+export type AuthActions = SetIsLoggedAction | SetLoginDataAction;
 
 export type SetClassroomsAction = {
   type: typeof SET_CLASSROOMS;
@@ -141,6 +143,10 @@ export type SetDisabledButtonAction = {
   type: typeof SET_DISABLED_BUTTON;
   value: boolean;
 };
+export type SetClassroomsFilterAction = {
+  type: typeof SET_CLASSROOMS_FILTER;
+  filter: string;
+};
 
 export type ClassroomsActions =
   | FreeClassroomAction
@@ -149,7 +155,8 @@ export type ClassroomsActions =
   | SetUserIdValueAction
   | SetUntilValueAction
   | SetIsFetchingAction
-  | SetDisabledButtonAction;
+  | SetDisabledButtonAction
+  | SetClassroomsFilterAction;
 
 export type SetRegisterAction = {
   type: typeof SET_REGISTER;

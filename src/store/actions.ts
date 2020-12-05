@@ -1,12 +1,16 @@
 import {
   Classroom,
   FreeClassroomAction,
+  Me,
   Occupied,
   OccupyClassroomAction,
   RegisterUnit,
   SetClassroomsAction,
+  SetClassroomsFilterAction,
   SetDisabledButtonAction,
   SetIsFetchingAction,
+  SetIsLoggedAction,
+  SetLoginDataAction,
   SetUntilValueAction,
   SetUserIdValueAction,
   SetUsersAction,
@@ -20,14 +24,23 @@ export const SET_USER_ID_VALUE = "SET_USER_ID_VALUE";
 export const SET_UNTIL_VALUE = "SET_UNTIL_VALUE";
 export const SET_IS_FETCHING = "SET_IS_FETCHING";
 export const SET_DISABLED_BUTTON = "SET_DISABLED_BUTTON";
+export const SET_CLASSROOMS_FILTER = "SET_CLASSROOMS_FILTER";
 
 export const SET_IS_LOGGED = "SET_IS_LOGGED";
+export const SET_LOGIN_DATA = "SET_LOGIN_DATA";
 
 export const SET_REGISTER = "SET_REGISTER";
 
 export const SET_USERS = "SET_USERS";
 
 //classrooms
+
+export const setClassroomsFilter = (
+  filter: string
+): SetClassroomsFilterAction => ({
+  type: SET_CLASSROOMS_FILTER,
+  filter,
+});
 
 export const setClassrooms = (
   classrooms: Array<Classroom>
@@ -68,9 +81,14 @@ export const setDisabledButton = (value: boolean): SetDisabledButtonAction => ({
 
 //auth
 
-export const setIsLogged = (isLogged: boolean) => ({
+export const setIsLogged = (isLogged: boolean): SetIsLoggedAction => ({
   type: SET_IS_LOGGED,
   isLogged,
+});
+
+export const setLoginData = (data: Me): SetLoginDataAction => ({
+  type: SET_LOGIN_DATA,
+  data,
 });
 
 //register

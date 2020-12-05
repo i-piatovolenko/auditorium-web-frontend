@@ -2,13 +2,14 @@ import {
   FREE_CLASSROOM,
   OCCUPY_CLASSROOM,
   SET_CLASSROOMS,
+  SET_CLASSROOMS_FILTER,
   SET_DISABLED_BUTTON,
   SET_IS_FETCHING,
   SET_UNTIL_VALUE,
   SET_USER_ID_VALUE,
 } from "../actions";
-import { ClassroomsActions, ClassroomsState, userTypes } from "../types";
-import { HOUR } from "../../lib/constants";
+import {ClassroomsActions, ClassroomsState, userTypes} from "../types";
+import {HOUR} from "../../lib/constants";
 
 const initialState: ClassroomsState = {
   classrooms: [
@@ -41,6 +42,7 @@ const initialState: ClassroomsState = {
   untilValue: HOUR,
   isFetching: false,
   disabledButton: true,
+  classroomsFilter: "ALL",
 };
 
 let classrooms = (
@@ -82,6 +84,9 @@ let classrooms = (
       return { ...state, isFetching: action.value };
     case SET_DISABLED_BUTTON:
       return { ...state, disabledButton: action.value };
+    case SET_CLASSROOMS_FILTER: {
+      return {...state, classroomsFilter: action.filter}
+    };
     default:
       return state;
   }
