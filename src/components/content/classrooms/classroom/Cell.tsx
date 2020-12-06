@@ -10,13 +10,22 @@ import pianoSpecialIcon from "../../../../assets/specialPiano.png";
 import grandPianoIcon from "../../../../assets/grandPiano.png";
 import uprightPianoIcon from "../../../../assets/uprightPiano.png";
 import { StarFilled } from "@ant-design/icons/lib";
+import {useDispatch, useSelector} from "react-redux";
+import {setModalVisible} from "../../../../store/actions";
 
 const ClassroomsGridCell = (props: any) => {
+    let dispatch = useDispatch();
+    // @ts-ignore
+    let visibility = useSelector(state => state.classroomsReducer.modalVisible)
+    visibility?document.body.style.overflowY = "hidden":document.body.style.overflowY = "scroll";
   return (
     <>
       <NavLink to={`/classrooms/${props.classroom.name}`}>
         <div
-          onClick={() => props.setVisible(true)}
+          onClick={() => {
+              dispatch(setModalVisible(true))
+              props.setVisible(true)
+          }}
           className={styles.classroom}
           style={!props.isOccupied ? { backgroundColor: "#6bff98" } : {}}
         >
@@ -99,33 +108,29 @@ const ClassroomsGridCell = (props: any) => {
           </div>
         </div>
       </NavLink>
-      <Modal
+        <Modal
           destroyOnClose
-        title={"Аудиторія №" + props.classroom.name}
-        visible={props.visible}
-        onOk={props.handleOk}
-        onCancel={props.handleCancel}
-        footer={[
-          <Button key="back" onClick={props.handleCancel}>
-            Закрити
-          </Button>,
-          props.footerButtonOk,
-        ]}
-        width={1000}
-      >
-        {props.isOccupied ? (
-          <Occupied classroom={props.classroom} />
-        ) : (
-          <Free
-            disabledButton={props.disabledButton}
-            classroom={props.classroom}
-          />
-        )}
-      </Modal>
-      {/*<Expanded*/}
-      {/*  isOccupied={props.isOccupied}*/}
-      {/*  classroom={props.classroom}*/}
-      {/*/>*/}
+          title={"Аудиторія №" + props.classroom.name}
+          visible={props.visible}
+          onOk={props.handleOk}
+          onCancel={props.handleCancel}
+          footer={[
+            <Button key="back" onClick={props.handleCancel}>
+              Закрити
+            </Button>,
+            props.footerButtonOk,
+          ]}
+          width={1000}
+        >
+          {props.isOccupied ? (
+            <Occupied classroom={props.classroom} />
+          ) : (
+            <Free
+              disabledButton={props.disabledButton}
+              classroom={props.classroom}
+            />
+          )}
+        </Modal>
     </>
   );
 };

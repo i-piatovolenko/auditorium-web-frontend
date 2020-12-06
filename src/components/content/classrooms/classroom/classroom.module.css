@@ -8,6 +8,7 @@
   cursor: pointer;
   min-height: 180px;
   position: relative;
+  overflow: hidden;
 }
 .classroom:hover {
   box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
