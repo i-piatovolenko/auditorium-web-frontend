@@ -11,6 +11,7 @@ import {
   SET_UNTIL_VALUE,
   SET_USER_ID_VALUE,
   SET_USERS,
+  SET_MODAL_VISIBLE,
 } from "./actions";
 
 export enum userTypes {
@@ -91,6 +92,7 @@ export interface ClassroomsState {
   isFetching: boolean;
   disabledButton: boolean;
   classroomsFilter: string;
+  modalVisible: boolean;
 }
 
 //Actions
@@ -148,6 +150,11 @@ export type SetClassroomsFilterAction = {
   filter: string;
 };
 
+export type SetModalVisibleAction = {
+  type: typeof SET_MODAL_VISIBLE;
+  value: boolean;
+};
+
 export type ClassroomsActions =
   | FreeClassroomAction
   | SetClassroomsAction
@@ -156,7 +163,8 @@ export type ClassroomsActions =
   | SetUntilValueAction
   | SetIsFetchingAction
   | SetDisabledButtonAction
-  | SetClassroomsFilterAction;
+  | SetClassroomsFilterAction
+  | SetModalVisibleAction;
 
 export type SetRegisterAction = {
   type: typeof SET_REGISTER;

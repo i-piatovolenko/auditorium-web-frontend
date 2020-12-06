@@ -1,14 +1,22 @@
 import react from "react";
 import styles from "./shortlist.module.css";
+import { Classroom } from "../../../../store/types";
 
-const ShortList = (props: any) => {
+type Props = {
+  filter: (cl: Classroom) => boolean;
+  classrooms: Array<Classroom>;
+};
+
+const ShortList: React.FC<Props> = ({ filter, classrooms }) => {
   return (
     <ul className={styles.roomList}>
-      {props.classrooms.map((cl: any) => (
-        <li className={cl.occupied!=null ? "" : styles.released}>
-          {cl.name}
-        </li>
-      ))}
+      {classrooms
+        .filter((cl) => filter(cl))
+        .map((cl: any) => (
+          <li className={cl.occupied != null ? "" : styles.released}>
+            {cl.name}
+          </li>
+        ))}
     </ul>
   );
 };

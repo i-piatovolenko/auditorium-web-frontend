@@ -11,6 +11,7 @@ import {
   SetIsFetchingAction,
   SetIsLoggedAction,
   SetLoginDataAction,
+  SetModalVisibleAction,
   SetUntilValueAction,
   SetUserIdValueAction,
   SetUsersAction,
@@ -25,6 +26,7 @@ export const SET_UNTIL_VALUE = "SET_UNTIL_VALUE";
 export const SET_IS_FETCHING = "SET_IS_FETCHING";
 export const SET_DISABLED_BUTTON = "SET_DISABLED_BUTTON";
 export const SET_CLASSROOMS_FILTER = "SET_CLASSROOMS_FILTER";
+export const SET_MODAL_VISIBLE = "SET_MODAL_VISIBLE";
 
 export const SET_IS_LOGGED = "SET_IS_LOGGED";
 export const SET_LOGIN_DATA = "SET_LOGIN_DATA";
@@ -76,6 +78,11 @@ export const setIsFetching = (value: boolean): SetIsFetchingAction => ({
 });
 export const setDisabledButton = (value: boolean): SetDisabledButtonAction => ({
   type: SET_DISABLED_BUTTON,
+  value,
+});
+
+export const setModalVisible = (value: boolean): SetModalVisibleAction => ({
+  type: SET_MODAL_VISIBLE,
   value,
 });
 

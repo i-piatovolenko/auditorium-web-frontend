@@ -5,11 +5,12 @@ import {
   SET_CLASSROOMS_FILTER,
   SET_DISABLED_BUTTON,
   SET_IS_FETCHING,
+  SET_MODAL_VISIBLE,
   SET_UNTIL_VALUE,
   SET_USER_ID_VALUE,
 } from "../actions";
-import {ClassroomsActions, ClassroomsState, userTypes} from "../types";
-import {HOUR} from "../../lib/constants";
+import { ClassroomsActions, ClassroomsState, userTypes } from "../types";
+import { HOUR } from "../../lib/constants";
 
 const initialState: ClassroomsState = {
   classrooms: [
@@ -43,6 +44,7 @@ const initialState: ClassroomsState = {
   isFetching: false,
   disabledButton: true,
   classroomsFilter: "ALL",
+  modalVisible: false,
 };
 
 let classrooms = (
@@ -85,8 +87,12 @@ let classrooms = (
     case SET_DISABLED_BUTTON:
       return { ...state, disabledButton: action.value };
     case SET_CLASSROOMS_FILTER: {
-      return {...state, classroomsFilter: action.filter}
-    };
+      return { ...state, classroomsFilter: action.filter };
+    }
+    case SET_MODAL_VISIBLE: {
+      debugger
+      return {...state, modalVisible: action.value}
+    }
     default:
       return state;
   }

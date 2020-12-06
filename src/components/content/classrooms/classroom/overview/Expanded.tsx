@@ -1,94 +1,109 @@
-import React, {useEffect, useState} from 'react';
-import {Button, Descriptions, Modal} from 'antd';
-import {useParams} from 'react-router-dom';
-import {useDispatch} from "react-redux";
-import {freeClassroomAC} from "../../../../../store/actions";
-import {gql, useMutation} from "@apollo/client";
+import React, {useState} from 'react';
+import {Button, Modal} from 'antd';
+import {useDispatch, useSelector} from "react-redux";
+import {freeClassroomAC, occupyClassroomAC, setDisabledButton, setModalVisible} from "../../../../../store/actions";
+import {useMutation} from "@apollo/client";
 import Occupied from "./occupied/Occupied";
 import Free from "./free/Free";
 import {fetchClassroomsTC} from "../../../../../store/effects";
+import {FREE_CLASSROOM, OCCUPY_CLASSROOM} from "../../../../../api/mutations";
 
 const Expanded = (props: any) => {
-
-
-    let [visible, setVisible] = useState(true)
-
-    let showModal = () => {
-        setVisible(true)
-    };
-
-    let handleOk = () => {
-        setVisible(false)
-    };
-
-    let handleCancel = () => {
-        setVisible(false)
-    };
-
-    const FREE_CLASSROOM = gql`
-        mutation free($input: FreeClassroomInput!){
-            freeClassroom(input: $input) {
-                classroom {
-                    name
-                    occupied {
-                        user {
-                            id
-                        }
-                    }
-                }
-                userErrors {
-                    message
-                    code
-                }
-            }
-        }
-    `;
-    const [freeClassroom, {loading, error, data}] = useMutation(FREE_CLASSROOM);
-    const dispatch = useDispatch();
     // @ts-ignore
-    let {name} = useParams();
-    let classroom = props.classroom;
+    let visible = useSelector(state=>state.classroomsReducer.modalVisible)
+    // @ts-ignore
+    let userId = useSelector((state) => state.classroomsReducer.userIdValue);
+    // @ts-ignore
+    let disabledButton = useSelector((state) => state.classroomsReducer.disabledButton
+    );
+    // @ts-ignore
+    let untilValue = useSelector((state) => state.classroomsReducer.untilValue);
+    const dispatch = useDispatch();
     let isOccupied = props.isOccupied;
-    let footerButtonOk = isOccupied ? <><Button key="submit" type="primary" onClick={() => {
-    }}>
-        Передати аудиторію
-    </Button><Button key="submit" type="primary" danger onClick={() => {
-        freeClassroom({
-            variables: {
-                "input": {
-                    "classroomName": name
-                }
-            }
-        }).then(r => {
-            dispatch(fetchClassroomsTC);
-            dispatch(freeClassroom(classroom.name))
-        });
-    }
-    }>
-        Звільнити аудиторію
-    </Button></> : <Button key="submit" type="primary" onClick={() => {
-    }}>
-        Записати в аудиторію
-    </Button>;
+    let handleOk = () => {
+        dispatch(setModalVisible(false));
+        dispatch(setDisabledButton(true));
+    };
+    let handleCancel = () => {
+        dispatch(setModalVisible(false));
+        dispatch(setDisabledButton(true));
+    };
+    const [occupyClassroom] = useMutation(OCCUPY_CLASSROOM);
+    const [freeClassroom] = useMutation(FREE_CLASSROOM);
+    let footerButtonOk = isOccupied ? (
+        <>
+            <Button key="submit" type="primary" onClick={() => {}}>
+                Передати аудиторію
+            </Button>
+            <Button
+                key="submit"
+                type="primary"
+                danger
+                onClick={() => {
+                    freeClassroom({
+                        variables: {
+                            input: {
+                                classroomName: props.classroom.name,
+                            },
+                        },
+                    }).then((r) => {
+                        dispatch(fetchClassroomsTC);
+                        dispatch(freeClassroomAC(props.classroom.name));
+                        dispatch(setDisabledButton(true));
+                        dispatch(setModalVisible(false));
+                    });
+                }}
+            >
+                Звільнити аудиторію
+            </Button>
+        </>
+    ) : (
+        <Button
+            disabled={disabledButton}
+            key="submit"
+            type="primary"
+            onClick={() => {
+                occupyClassroom({
+                    variables: {
+                        input: {
+                            classroomName: String(props.classroom.name),
+                            userId: userId,
+                            until: new Date(new Date().getTime() + untilValue),
+                        },
+                    },
+                }).then((r) => {
+                    let occupiedData = r.data.occupyClassroom.classroom.occupied;
+                    dispatch(occupyClassroomAC(occupiedData, props.classroom.name));
+                    dispatch(setDisabledButton(true));
+                    dispatch(setModalVisible(false));
+                });
+            }}
+        >
+            Записати в аудиторію
+        </Button>
+    );
 
     return <Modal
-        title={"Аудиторія №" + name}
+        title={"Аудиторія №" + props.classroom.name}
         visible={visible}
         onOk={handleOk}
         onCancel={handleCancel}
         footer={[
-            <Button key="back" onClick={() => {
-            }}>
+            <Button key="back" onClick={handleCancel}>
                 Закрити
             </Button>,
             footerButtonOk,
         ]}
+        width={1000}
     >
-        {
-            isOccupied ?
-                <Occupied isOccupied={isOccupied} classroom={classroom}/> :
-                <Free isOccupied={isOccupied} classroom={classroom}/>
-        }
+        {props.isOccupied ? (
+            <Occupied classroom={props.classroom} />
+        ) : (
+            <Free
+                disabledButton={disabledButton}
+                classroom={props.classroom}
+            />
+        )}
     </Modal>
 };
 
