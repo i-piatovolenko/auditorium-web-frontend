@@ -1,4 +1,8 @@
-import { SET_IS_LOGGED, SET_LOGIN_DATA } from "../actions";
+import {
+  SET_IS_LOGGED,
+  SET_LOGIN_DATA,
+  SET_VISIBLE_EDIT_MODE,
+} from "../actions";
 import { AuthActions, Me, userTypes } from "../types";
 
 const initialState: Me = {
@@ -9,7 +13,11 @@ const initialState: Me = {
   lastName: "John",
   type: userTypes.OTHER,
   department: "",
+  email: "",
+  phoneNumber: "",
+  extraPhoneNumbers: "",
   isLogged: false,
+  visibleEditModal: false,
 };
 
 const auth = (state = initialState, action: AuthActions): Me => {
@@ -27,8 +35,13 @@ const auth = (state = initialState, action: AuthActions): Me => {
         lastName: action.data.lastName,
         type: action.data.type,
         department: action.data.department,
+        email: action.data.email,
+        phoneNumber: action.data.phoneNumber,
+        extraPhoneNumbers: action.data.extraPhoneNumbers,
       };
     }
+    case SET_VISIBLE_EDIT_MODE:
+      return { ...state, visibleEditModal: action.value };
     default:
       return state;
   }

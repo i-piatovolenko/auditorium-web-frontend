@@ -7,6 +7,9 @@ import Schedule from "../../components/content/schedule/Schedule";
 import Log from "../../components/content/register/Register";
 import Catalog from "../../components/content/catalog/Catalog";
 import { LoadingOutlined } from "@ant-design/icons/lib";
+import Administration from "../../components/content/administration/Administration";
+import Settings from "../../components/content/settings/Settings";
+import Profile from "../../components/content/profile/Profile";
 
 const antIcon = <LoadingOutlined style={{ fontSize: 24 }} spin />;
 
@@ -37,8 +40,16 @@ const PagesRouter = (props: any) => (
     <Route path="/catalog">
       <Catalog />
     </Route>
+    <Route path="/administration">
+      <Administration />
+    </Route>
+    <Route path="/settings">
+      <Settings />
+    </Route>
+    <Route path="/profile">
+      <Profile />
+    </Route>
   </Switch>
-
 );
 
 export default PagesRouter;

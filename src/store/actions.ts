@@ -14,7 +14,7 @@ import {
   SetModalVisibleAction,
   SetUntilValueAction,
   SetUserIdValueAction,
-  SetUsersAction,
+  SetUsersAction, SetVisibleEditModalAction,
   User,
 } from "./types";
 
@@ -34,6 +34,7 @@ export const SET_LOGIN_DATA = "SET_LOGIN_DATA";
 export const SET_REGISTER = "SET_REGISTER";
 
 export const SET_USERS = "SET_USERS";
+export const SET_VISIBLE_EDIT_MODE = "SET_VISIBLE_EDIT_MODE";
 
 //classrooms
 
@@ -96,6 +97,10 @@ export const setIsLogged = (isLogged: boolean): SetIsLoggedAction => ({
 export const setLoginData = (data: Me): SetLoginDataAction => ({
   type: SET_LOGIN_DATA,
   data,
+});
+export const setVisibleEditModal = (value: boolean): SetVisibleEditModalAction => ({
+  type: SET_VISIBLE_EDIT_MODE,
+  value,
 });
 
 //register

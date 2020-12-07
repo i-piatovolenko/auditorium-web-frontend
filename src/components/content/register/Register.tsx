@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Button, DatePicker, Divider, Input, Space, Table } from "antd";
+import {Button, Card, DatePicker, Divider, Input, Space, Table} from "antd";
 import Highlighter from "react-highlight-words";
 import { SearchOutlined } from "@ant-design/icons/lib";
 import { client } from "../../../api/client";
@@ -140,16 +140,16 @@ const Log = () => {
   ];
   return (
     <>
-      <h1>Журнал видачі аудиторій</h1>
-      <Divider />
-      <p>Виберіть дату:</p>
-      <DatePicker
-        onChange={() => {}}
-        style={{
-          marginBottom: "10px",
-        }}
-      />
-      <Table columns={columns} dataSource={register} />
+      <Card title="Журнал видачі аудиторій" bordered={false} style={{ width: "100%" }}>
+        <p>Виберіть дату:</p>
+        <DatePicker
+            onChange={() => {}}
+            style={{
+              marginBottom: "10px",
+            }}
+        />
+        <Table columns={columns} dataSource={register} />
+      </Card>
     </>
   );
 };

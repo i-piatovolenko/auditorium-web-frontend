@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Card, Layout, Menu } from "antd";
+import {Badge, Card, Layout, Menu} from "antd";
 import {
   HomeOutlined,
   SettingOutlined,
@@ -15,6 +15,7 @@ import { useSelector } from "react-redux";
 import { userTypesUA } from "../lib/constants";
 import { Me } from "../store/types";
 import styles from './sidebar.module.css';
+import {UsergroupAddOutlined} from "@ant-design/icons/lib";
 
 const { Sider } = Layout;
 
@@ -52,8 +53,8 @@ const Sidebar = () => {
             title={me.firstName + " " + me.lastName}
             style={{ width: "100%", marginTop: 10 }}
           >
-            <p>Права: {userTypesUA[me.type]}</p>
-            <a href="#">Профіль</a>
+            <p>Статус: {userTypesUA[me.type]}</p>
+            <NavLink to="/profile">Профіль</NavLink>
           </Card>
             </div>
         <Router history={history}>
@@ -74,14 +75,17 @@ const Sidebar = () => {
               <NavLink to="/catalog">Каталог</NavLink>
             </Menu.Item>
             <Menu.Divider />
-            <Menu.Item disabled key="6" icon={<SettingOutlined />}>
+            <Menu.Item key="6" icon={<UsergroupAddOutlined />}>
+              <NavLink to="/administration">Адміністрування</NavLink>
+            </Menu.Item>
+            <Menu.Item key="7" icon={<SettingOutlined />}>
               <NavLink to="/settings">Налаштування</NavLink>
             </Menu.Item>
-            <Menu.Item disabled key="7" icon={<UserOutlined />}>
+            <Menu.Item key="8" icon={<UserOutlined />}>
               <NavLink to="/profile">Профіль</NavLink>
             </Menu.Item>
             <Menu.Divider />
-            <Menu.Item disabled key="8" icon={<LogoutOutlined />}>
+            <Menu.Item disabled key="9" icon={<LogoutOutlined />}>
               <NavLink to="/logout">Вийти</NavLink>
             </Menu.Item>
           </Menu>

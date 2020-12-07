@@ -10,6 +10,9 @@ const initialState: UsersState = {
       lastName: "",
       type: userTypes.OTHER,
       department: "",
+      email: "",
+      phoneNumber: "",
+      extraPhoneNumbers: "",
     },
   ],
 };

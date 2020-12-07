@@ -11,7 +11,7 @@ import {
   SET_UNTIL_VALUE,
   SET_USER_ID_VALUE,
   SET_USERS,
-  SET_MODAL_VISIBLE,
+  SET_MODAL_VISIBLE, SET_VISIBLE_EDIT_MODE,
 } from "./actions";
 
 export enum userTypes {
@@ -31,11 +31,15 @@ export interface User {
   lastName: string;
   type: userTypes;
   department: string;
+  email: string;
+  phoneNumber: string;
+  extraPhoneNumbers: string;
 }
 
 export interface Me extends User {
   token: string;
   isLogged: boolean;
+  visibleEditModal: boolean;
 }
 export interface Occupied {
   user: User;
@@ -113,8 +117,12 @@ export type SetLoginDataAction = {
   type: typeof SET_LOGIN_DATA;
   data: Me;
 };
+export type SetVisibleEditModalAction = {
+  type: typeof SET_VISIBLE_EDIT_MODE
+  value: boolean;
+};
 
-export type AuthActions = SetIsLoggedAction | SetLoginDataAction;
+export type AuthActions = SetIsLoggedAction | SetLoginDataAction | SetVisibleEditModalAction;
 
 export type SetClassroomsAction = {
   type: typeof SET_CLASSROOMS;

@@ -29,7 +29,6 @@ const AuthorisationContainer = () => {
       error(result.data.login.userErrors[0].message);
     } else {
       dispatch(setIsLogged(true));
-      console.log(result.data.login.user)
       dispatch(
         setLoginData({
           token: result.data.login.user,

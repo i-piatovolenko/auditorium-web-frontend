@@ -68,6 +68,9 @@ export const LOGIN = gql`
         patronymic
         lastName
         type
+        phoneNumber
+        extraPhoneNumbers
+        email
       }
       userErrors {
         message

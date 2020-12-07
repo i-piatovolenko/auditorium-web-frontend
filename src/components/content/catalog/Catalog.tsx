@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {Button, Input, Space, Table} from "antd";
+import {Button, Card, Input, Space, Table} from "antd";
 import { SearchOutlined } from '@ant-design/icons';
 import Highlighter from 'react-highlight-words';
 import {useSelector} from "react-redux";
@@ -105,9 +105,9 @@ const Catalog = () => {
             },
         ];
     return <>
-        <h1>Каталог користувачів</h1>
-        <Table columns={columns} dataSource={users} />;
-
+        <Card title="Каталог користувачів" bordered={false} style={{ width: "100%" }}>
+            <Table columns={columns} dataSource={users} />
+        </Card>
     </>
 }
 export default Catalog;
