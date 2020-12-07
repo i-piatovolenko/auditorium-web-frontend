@@ -12,6 +12,7 @@
     margin-right: 2px;
     margin-bottom: 2px;
     transition: all .2s linear;
+    color: #000;
 }
 
 .roomList li:hover {

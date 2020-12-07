@@ -90,7 +90,6 @@ let classrooms = (
       return { ...state, classroomsFilter: action.filter };
     }
     case SET_MODAL_VISIBLE: {
-      debugger
       return {...state, modalVisible: action.value}
     }
     default:

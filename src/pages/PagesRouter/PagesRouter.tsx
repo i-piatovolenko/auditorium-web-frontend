@@ -12,7 +12,7 @@ const antIcon = <LoadingOutlined style={{ fontSize: 24 }} spin />;
 
 const PagesRouter = (props: any) => (
   <Switch>
-    <Route path="/classrooms">
+    <Route path="/classrooms/:name?">
       {props.isFetching ? (
         <Alert
           message="Завантаження даних з сервера..."
@@ -38,6 +38,7 @@ const PagesRouter = (props: any) => (
       <Catalog />
     </Route>
   </Switch>
+
 );
 
 export default PagesRouter;
