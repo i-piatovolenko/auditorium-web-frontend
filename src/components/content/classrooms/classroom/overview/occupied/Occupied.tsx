@@ -26,6 +26,11 @@ const Occupied = ({classroom}: any) => {
                         </Descriptions>
                     }
                 </Descriptions.Item>
+                <Descriptions.Item label="Розклад:">
+                    {classroom.schedule.map((el:any)=>{
+                        return <p>{el.user.lastName} — з {el.from} до {el.to}</p>
+                    })}
+                </Descriptions.Item>
             </Descriptions>
         </div>
         <div>
