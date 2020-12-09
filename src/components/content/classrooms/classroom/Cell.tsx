@@ -3,27 +3,40 @@ import styles from "./classroom.module.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCrown } from "@fortawesome/free-solid-svg-icons";
 import { NavLink } from "react-router-dom";
-import { Button, Modal, Tooltip } from "antd";
-import Occupied from "./overview/occupied/Occupied";
-import Free from "./overview/free/Free";
+import { Tooltip } from "antd";
 import pianoSpecialIcon from "../../../../assets/specialPiano.png";
 import grandPianoIcon from "../../../../assets/grandPiano.png";
 import uprightPianoIcon from "../../../../assets/uprightPiano.png";
-import { StarFilled } from "@ant-design/icons/lib";
-import {useDispatch, useSelector} from "react-redux";
-import {setModalVisible} from "../../../../store/actions";
+import { StarFilled, WarningOutlined } from "@ant-design/icons/lib";
+import { useDispatch, useSelector } from "react-redux";
+import { setModalVisible } from "../../../../store/actions";
+import { HOUR, MINUTE } from "../../../../lib/constants";
+import { getScheduleTimeInMilliseconds } from "../../../../lib/lib";
 
 const ClassroomsGridCell = (props: any) => {
-    let dispatch = useDispatch();
-    // @ts-ignore
-    let visibility = useSelector(state => state.classroomsReducer.modalVisible)
-    visibility?document.body.style.overflowY = "hidden":document.body.style.overflowY = "scroll";
+  let dispatch = useDispatch();
+  let current = new Date().getHours() * HOUR + new Date().getMinutes() * MINUTE;
+  let schedule = props.classroom.schedule;
+  let timeSnippets = schedule.map((el: any) => {
+    return {
+      from: getScheduleTimeInMilliseconds(el.from),
+      to: getScheduleTimeInMilliseconds(el.to),
+    };
+  });
+  let hideWarning = timeSnippets
+    .map((el: any) => current > el.from < el.to)
+    .every((el: any) => el === true);
+  // @ts-ignore
+  let visibility = useSelector((state) => state.classroomsReducer.modalVisible);
+  visibility
+    ? (document.body.style.overflowY = "hidden")
+    : (document.body.style.overflowY = "scroll");
   return (
     <>
       <NavLink to={`/classrooms/${props.classroom.name}`}>
         <div
           onClick={() => {
-              dispatch(setModalVisible(true))
+            dispatch(setModalVisible(true));
           }}
           className={styles.classroom}
           style={!props.isOccupied ? { backgroundColor: "#6bff98" } : {}}
@@ -82,9 +95,14 @@ const ClassroomsGridCell = (props: any) => {
               <p className={styles.occupiedTime}>
                 Зайнято до: <b>{props.untilTime}</b>
               </p>
-            ) : (
-              ""
-            )}
+            ) : !hideWarning ? (
+              <p style={{fontWeight: 600, color: "rgb(255,183,0, .5)" }}className={styles.occupiedTime}>
+                <WarningOutlined
+                  style={{ fontSize: 24, color: "rgb(255,183,0, .5)" }}
+                />
+                &nbsp;Зайнято за розкладом
+              </p>
+            ) : null}
           </div>
           <div className={styles.inst}>
             <ul>

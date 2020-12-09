@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { userTypesUA } from "../../../../lib/constants";
 import { useSelector } from "react-redux";
-import styles from "./../administration.module.css";
+import styles from "./usersVerification.module.css";
 import { Button, Card } from "antd";
 import { Input } from "antd";
 
