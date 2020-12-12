@@ -13,7 +13,7 @@
 .classroom:hover {
   box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
 }
-.cellTitle {
+.elementTitle {
   font-size: 22px;
 }
 .classroomName {
@@ -48,25 +48,20 @@
   vertical-align: bottom;
   margin-right: 5px;
 }
-.desc {
+.description {
 }
-.inst {
+.instruments {
   color: #000;
 }
 
-.inst ul {
+.instruments ul {
   padding: 0;
 }
 
-.inst ul li {
+.instruments ul li {
   list-style-type: none;
   padding: 5px;
   background-color: rgba(255, 255, 255, 0.3);
   border-radius: 5px;
   margin-bottom: 5px;
-}
-
-.occupiedTime {
-  color: #8b8b8b;
-  text-align: center;
 }

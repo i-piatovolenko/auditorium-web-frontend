@@ -1,0 +1,10 @@
+.occupiedTime {
+  color: #8b8b8b;
+  text-align: center;
+}
+
+.warning {
+  font-weight: 600;
+  color: rgba(255, 183, 0, 0.5);
+  font-size: 16px;
+}

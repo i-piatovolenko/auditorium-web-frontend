@@ -11,7 +11,8 @@ import {
   SET_UNTIL_VALUE,
   SET_USER_ID_VALUE,
   SET_USERS,
-  SET_MODAL_VISIBLE, SET_VISIBLE_EDIT_MODE,
+  SET_MODAL_VISIBLE,
+  SET_VISIBLE_EDIT_MODE,
 } from "./actions";
 
 export enum userTypes {
@@ -42,17 +43,26 @@ export interface Me extends User {
   visibleEditModal: boolean;
 }
 export interface Occupied {
-  user: User;
+  user: User | null;
   until: number;
 }
 
-export interface Instrument {}
+export interface Instrument {
+  id: number;
+  type: string;
+  name: string;
+  rate: number;
+}
 
 export interface Comment {}
 
 interface Disabled {}
 
-interface ScheduleUnit {}
+export type ScheduleUnit = {
+  user: User;
+  from: string;
+  to: string;
+};
 
 export interface Classroom {
   id: number;
@@ -118,11 +128,14 @@ export type SetLoginDataAction = {
   data: Me;
 };
 export type SetVisibleEditModalAction = {
-  type: typeof SET_VISIBLE_EDIT_MODE
+  type: typeof SET_VISIBLE_EDIT_MODE;
   value: boolean;
 };
 
-export type AuthActions = SetIsLoggedAction | SetLoginDataAction | SetVisibleEditModalAction;
+export type AuthActions =
+  | SetIsLoggedAction
+  | SetLoginDataAction
+  | SetVisibleEditModalAction;
 
 export type SetClassroomsAction = {
   type: typeof SET_CLASSROOMS;

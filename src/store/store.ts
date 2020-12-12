@@ -5,12 +5,15 @@ import users from "./reducers/users";
 import auth from "./reducers/auth";
 import register from "./reducers/register";
 
-let reducers = combineReducers({
+let rootReducer = combineReducers({
   classroomsReducer: classrooms,
   usersReducer: users,
   authReducer: auth,
   registerReducer: register,
 });
-let store = createStore(reducers, applyMiddleware(thunk));
+let store = createStore(rootReducer, applyMiddleware(thunk));
+
+type RootReducerType = typeof rootReducer;
+export type AuditoriumStateType = ReturnType<RootReducerType>;
 
 export default store;

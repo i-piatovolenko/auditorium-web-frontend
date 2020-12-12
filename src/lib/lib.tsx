@@ -1,4 +1,5 @@
 import { HOUR, MINUTE, TIME_SNIPPETS } from "./constants";
+import { ScheduleUnit } from "../store/types";
 
 export const getScheduleTimeline = (start: number, end: number): string[] => {
   let timeSnippets: string[] = [];
@@ -14,7 +15,7 @@ export const getScheduleTimeline = (start: number, end: number): string[] => {
   return timeSnippets;
 };
 
-export const getScheduleTimeInMilliseconds = (scheduleUnitTime: any) => {
+const getScheduleTimeInMilliseconds = (scheduleUnitTime: any) => {
   return scheduleUnitTime
     .split(":")
     .map((el: any, index: number) => {
@@ -22,3 +23,28 @@ export const getScheduleTimeInMilliseconds = (scheduleUnitTime: any) => {
     })
     .reduce((acc: any, curr: any) => acc + curr);
 };
+
+export const getPossiblyOccupied = (schedule: Array<any>) => {
+  const current =
+    new Date().getHours() * HOUR + new Date().getMinutes() * MINUTE;
+  const timeSnippets = schedule.map((el: any) => {
+    return {
+      from: getScheduleTimeInMilliseconds(el.from),
+      to: getScheduleTimeInMilliseconds(el.to),
+    };
+  });
+  return timeSnippets
+    .map((el: any) => current > el.from < el.to)
+    .every((el: any) => el === true);
+};
+
+export const getTimeHHMM = (date: Date) => {
+  return date.getHours() + ":" + date.getMinutes();
+};
+
+export const getScheduleUnitRowLength = (schedule: Array<ScheduleUnit>, units: string) =>
+  schedule
+    .map((scheduleUnit: ScheduleUnit) => {
+      return parseInt(scheduleUnit.to) - parseInt(scheduleUnit.from) + units;
+    })
+    .join(" ");

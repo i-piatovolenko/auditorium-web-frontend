@@ -1,4 +1,4 @@
-.descriptionGrid {
+.popupGrid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(400px, 2fr));
     grid-gap: 2vw;

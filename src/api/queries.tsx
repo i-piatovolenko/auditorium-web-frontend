@@ -2,6 +2,7 @@ import { gql } from "@apollo/client";
 import { client } from "./client";
 
 export const getClassrooms = () => {
+
   return client.query({
     query: gql`
       query {

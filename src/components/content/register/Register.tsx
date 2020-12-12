@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import {Button, Card, DatePicker, Divider, Input, Space, Table} from "antd";
+import {useDispatch, useSelector} from "react-redux";
+import {Button, Card, DatePicker, Input, Space, Table} from "antd";
 import Highlighter from "react-highlight-words";
 import { SearchOutlined } from "@ant-design/icons/lib";
 import { client } from "../../../api/client";
 import { fetchRegistersTC } from "../../../store/effects";
+import {Document, Page, PDFDownloadLink, StyleSheet, Text, View} from '@react-pdf/renderer'
 
 const Log = () => {
   let [searchText, setSearchText] = useState("");
@@ -138,8 +139,37 @@ const Log = () => {
       key: "to",
     },
   ];
+  const styles = StyleSheet.create({
+    title: {
+      fontFamily: 'Arial'
+    },
+    page: {
+      flexDirection: "row",
+      backgroundColor: "#FFF",
+    },
+    section: {
+      margin: 10,
+      padding: 10,
+      flexGrow: 1,
+    },
+  });
+
+  let Doc = () => <Document>
+    <Page size="A4" style={styles.page}>
+      <View style={styles.section}>
+        <Text>Аудиторія</Text>
+      </View>
+      <View style={styles.section}>
+        <Text>П.І.Б.</Text>
+
+      </View>
+    </Page>
+  </Document>;
   return (
     <>
+      {/*<PDFDownloadLink document={<Doc/>} fileName="register.pdf">*/}
+      {/*  {({ blob, url, loading, error }) => (loading ? 'Loading document...' : 'Download now!')}*/}
+      {/*</PDFDownloadLink>*/}
       <Card title="Журнал видачі аудиторій" bordered={false} style={{ width: "100%" }}>
         <p>Виберіть дату:</p>
         <DatePicker

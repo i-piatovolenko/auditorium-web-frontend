@@ -1,10 +1,10 @@
-.roomList {
+.caviarClassroomsList {
     list-style-type: none;
     margin-left: 10px;
     padding: 0;
 }
 
-.roomList li {
+.caviarClassroomsList li {
     display: inline-block;
     border: 1px solid rgba(0, 0, 0, .1);
     border-radius: 3px;
@@ -15,7 +15,7 @@
     color: #000;
 }
 
-.roomList li:hover {
+.caviarClassroomsList li:hover {
     background-color: dodgerblue;
     color: white;
     cursor: pointer;
