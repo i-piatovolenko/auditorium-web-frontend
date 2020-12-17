@@ -12,9 +12,11 @@ import {
   SetIsLoggedAction,
   SetLoginDataAction,
   SetModalVisibleAction,
+  SetShowUserPopup,
   SetUntilValueAction,
   SetUserIdValueAction,
-  SetUsersAction, SetVisibleEditModalAction,
+  SetUsersAction,
+  SetVisibleEditModalAction,
   User,
 } from "./types";
 
@@ -35,6 +37,8 @@ export const SET_REGISTER = "SET_REGISTER";
 
 export const SET_USERS = "SET_USERS";
 export const SET_VISIBLE_EDIT_MODE = "SET_VISIBLE_EDIT_MODE";
+
+export const SET_SHOW_USER_POPUP = "SET_SHOW_USER_POPUP";
 
 //classrooms
 
@@ -98,7 +102,9 @@ export const setLoginData = (data: Me): SetLoginDataAction => ({
   type: SET_LOGIN_DATA,
   data,
 });
-export const setVisibleEditModal = (value: boolean): SetVisibleEditModalAction => ({
+export const setVisibleEditModal = (
+  value: boolean
+): SetVisibleEditModalAction => ({
   type: SET_VISIBLE_EDIT_MODE,
   value,
 });
@@ -115,4 +121,11 @@ export const setRegister = (register: Array<RegisterUnit>) => ({
 export const setUsers = (users: Array<User>): SetUsersAction => ({
   type: SET_USERS,
   users,
+});
+
+//auditorium
+
+export const setShowUsersPopup = (isShown: boolean): SetShowUserPopup => ({
+  type: SET_SHOW_USER_POPUP,
+  isShown,
 });

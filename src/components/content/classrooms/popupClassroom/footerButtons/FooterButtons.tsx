@@ -7,6 +7,7 @@ type Props = {
   onFreeClassroom: (closeWindow: boolean) => void;
   onOccupyClassroom: () => void;
   isButtonDisabled: boolean;
+  goBackHistory: () => void;
 };
 
 const PopupClassroomFooterButtons: React.FC<Props> = ({
@@ -14,15 +15,28 @@ const PopupClassroomFooterButtons: React.FC<Props> = ({
   onOccupyClassroom,
   isButtonDisabled,
   occupied,
+  goBackHistory,
 }) => {
   return (
     <>
       {occupied ? (
         <>
-          <Button key="submit" type="primary" onClick={()=>onFreeClassroom(false)}>
+          <Button
+            key="submit"
+            type="primary"
+            onClick={() => onFreeClassroom(false)}
+          >
             Передати аудиторію
           </Button>
-          <Button key="submit" type="primary" danger onClick={()=>onFreeClassroom(true)}>
+          <Button
+            key="submit"
+            type="primary"
+            danger
+            onClick={() => {
+              goBackHistory();
+              onFreeClassroom(true);
+            }}
+          >
             Звільнити аудиторію
           </Button>
         </>
@@ -31,7 +45,10 @@ const PopupClassroomFooterButtons: React.FC<Props> = ({
           disabled={isButtonDisabled}
           key="submit"
           type="primary"
-          onClick={onOccupyClassroom}
+          onClick={() => {
+            goBackHistory();
+            onOccupyClassroom();
+          }}
         >
           Записати в аудиторію
         </Button>

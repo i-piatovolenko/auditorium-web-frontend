@@ -15,9 +15,14 @@ export const getClassrooms = () => {
           description
           occupied {
             user {
+              id
               firstName
+              patronymic
               lastName
               type
+              phoneNumber
+              email
+              department
             }
             until
           }
@@ -52,6 +57,9 @@ export const getUsers = () => {
           lastName
           type
           department
+          phoneNumber
+          extraPhoneNumbers
+          email
         }
       }
     `,

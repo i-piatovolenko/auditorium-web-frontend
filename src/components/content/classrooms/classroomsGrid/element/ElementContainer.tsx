@@ -14,9 +14,10 @@ type Props = {
 
 const ClassroomsGridElementContainer: React.FC<Props> = ({ classroom }) => {
   const { occupied } = classroom;
+  console.log(occupied);
   let untilDate = new Date(occupied ? occupied.until : 0);
   const untilTime = getTimeHHMM(untilDate);
-  const userType = occupied != null ? occupied.user?.type : "";
+  const userType = occupied ? occupied.user?.type : "";
   const userTypeUA = userTypesUA[userType as userTypes];
   const userTypeColor = userTypeColors[userType as userTypes];
   const visibility = useSelector<AuditoriumStateType, boolean>((state) => {

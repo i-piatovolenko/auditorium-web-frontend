@@ -51,7 +51,7 @@ export const occupyClassroomTC = (
 export const freeClassroomTC = (
   classroomName: string,
   freeClassroom: any,
-  closeWindow: boolean,
+  closeWindow: boolean
 ) => async (dispatch: any) => {
   try {
     await freeClassroom({

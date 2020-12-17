@@ -13,6 +13,7 @@ import {
   SET_USERS,
   SET_MODAL_VISIBLE,
   SET_VISIBLE_EDIT_MODE,
+  SET_SHOW_USER_POPUP,
 } from "./actions";
 
 export enum userTypes {
@@ -109,6 +110,10 @@ export interface ClassroomsState {
   modalVisible: boolean;
 }
 
+export interface AuditoriumState {
+  showUserPopup: boolean;
+}
+
 //Actions
 
 export type SetUsersAction = {
@@ -193,3 +198,10 @@ export type SetRegisterAction = {
 };
 
 export type RegisterActions = SetRegisterAction;
+
+export type SetShowUserPopup = {
+  type: typeof SET_SHOW_USER_POPUP;
+  isShown: boolean;
+};
+
+export type AuditoriumActions = SetShowUserPopup;

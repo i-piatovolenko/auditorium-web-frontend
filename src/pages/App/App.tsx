@@ -6,13 +6,18 @@ import PageHolder from "../PageHolder";
 import LoginPage from "../../components/loginPage/LoginPage";
 import { Redirect, Route } from "react-router";
 
-const { Footer, Header } = Layout;
+const { Footer } = Layout;
 
-const App = ({isLogged, ...props}:any) => {
-
+const App = ({ isLogged }: any) => {
   return (
     <Layout style={{ minHeight: "100vh" }}>
-      <Route path="/">{isLogged ? <Redirect to="/" /> : <LoginPage />}</Route>
+      <Route path="/">
+        {localStorage.getItem("isLogged") === "true" ? (
+          <Redirect to="/" />
+        ) : (
+          <LoginPage />
+        )}
+      </Route>
       <Sidebar />
       <Layout className="site-layout">
         {/*<Header className="site-layout-background" style={{ padding: 0 }} />*/}

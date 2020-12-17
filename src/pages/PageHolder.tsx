@@ -6,6 +6,7 @@ import PagesRouter from "./PagesRouter/PagesRouterContainer";
 const { Content } = Layout;
 
 const PageHolder = () => {
+
   return (
     <Content style={{ margin: "0 16px" }}>
       <div

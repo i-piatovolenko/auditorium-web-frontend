@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useEffect} from "react";
 import { Route, Switch } from "react-router-dom";
 import { Alert, Spin } from "antd";
 import ClassroomsGrid from "../../components/content/classrooms/ClassroomsPage";
@@ -14,43 +14,45 @@ import ClassroomsPage from "../../components/content/classrooms/ClassroomsPage";
 
 const antIcon = <LoadingOutlined style={{ fontSize: 24 }} spin />;
 
-const PagesRouter = (props: any) => (
-  <Switch>
-    <Route path="/classrooms/:name?">
-      {props.isFetching ? (
-        <Alert
-          message="Завантаження даних з сервера..."
-          description="Зачекайте будь ласка!"
-          type="info"
-          showIcon
-          icon={<Spin indicator={antIcon} />}
-        />
-      ) : (
-        <ClassroomsPage />
-      )}
-    </Route>
-    <Route exact path="/">
-      <Home />
-    </Route>
-    <Route path="/schedule">
-      <Schedule />
-    </Route>
-    <Route path="/register">
-      <Log />
-    </Route>
-    <Route path="/catalog">
-      <Catalog />
-    </Route>
-    <Route path="/administration">
-      <Administration />
-    </Route>
-    <Route path="/settings">
-      <Settings />
-    </Route>
-    <Route path="/profile">
-      <Profile />
-    </Route>
-  </Switch>
-);
+const PagesRouter = (props: any) => {
+  return (
+    <Switch>
+      <Route path="/classrooms/:name?/:userId?">
+        {props.isFetching ? (
+          <Alert
+            message="Завантаження даних з сервера..."
+            description="Зачекайте будь ласка!"
+            type="info"
+            showIcon
+            icon={<Spin indicator={antIcon} />}
+          />
+        ) : (
+          <ClassroomsPage />
+        )}
+      </Route>
+      <Route exact path="/">
+        <Home />
+      </Route>
+      <Route path="/schedule">
+        <Schedule />
+      </Route>
+      <Route path="/register">
+        <Log />
+      </Route>
+      <Route path="/catalog/:userId?">
+        <Catalog />
+      </Route>
+      <Route path="/administration">
+        <Administration />
+      </Route>
+      <Route path="/settings">
+        <Settings />
+      </Route>
+      <Route path="/profile">
+        <Profile />
+      </Route>
+    </Switch>
+  );
+};
 
 export default PagesRouter;

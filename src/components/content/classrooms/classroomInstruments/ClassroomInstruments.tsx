@@ -7,14 +7,11 @@ import { Instrument } from "../../../../store/types";
 
 type Props = {
   instruments: Array<Instrument>;
-  style?: {
-      paddingTop: number
-  };
 };
 
-const ClassroomsInstruments: React.FC<Props> = ({ instruments, style }) => {
+const ClassroomsInstruments: React.FC<Props> = ({ instruments }) => {
   return (
-    <div style={style} className={styles.instruments}>
+    <div className={styles.instruments}>
       <ul>
         {instruments.map(({ id, type, name, rate }: Instrument) => (
           <li key={id}>

@@ -19,10 +19,10 @@ const ClassroomSchedule: React.FC<Props> = ({ schedule }) => {
       >
         {schedule.map((scheduleUnit: ScheduleUnit) => {
           let { user, from, to } = scheduleUnit;
-          let unitInfo = [user.lastName, "— з", from, "до", to].join(" ");
+          let unitInfo = [user.lastName, from, "-", to].join(" ");
           return (
             <Tooltip title={unitInfo}>
-              <div>{unitInfo}</div>
+              <div className={styles.scheduleUnit}><span>{unitInfo}</span></div>
             </Tooltip>
           );
         })}

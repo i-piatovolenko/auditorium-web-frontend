@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import {Badge, Card, Layout, Menu} from "antd";
+import React, {useEffect, useState} from "react";
+import { Card, Layout, Menu} from "antd";
 import {
   HomeOutlined,
   SettingOutlined,
@@ -16,6 +16,7 @@ import { userTypesUA } from "../lib/constants";
 import { Me } from "../store/types";
 import styles from './sidebar.module.css';
 import {UsergroupAddOutlined} from "@ant-design/icons/lib";
+import {AuditoriumStateType} from "../store/store";
 
 const { Sider } = Layout;
 
@@ -27,9 +28,7 @@ const Sidebar = () => {
     setCollapsed(!collapsed);
   };
 
-  // @ts-ignore
-  let me: Me = useSelector((state) => state.authReducer);
-
+  let me: Me = useSelector((state: AuditoriumStateType) => state.authReducer);
   return (
     <Sider
       theme="light"

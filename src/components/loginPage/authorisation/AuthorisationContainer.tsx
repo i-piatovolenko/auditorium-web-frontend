@@ -28,10 +28,13 @@ const AuthorisationContainer = () => {
       console.log(result.data.login.userErrors[0].message);
       error(result.data.login.userErrors[0].message);
     } else {
+      localStorage.setItem("userId", result.data.login.user.id);
+      localStorage.setItem("token", result.data.login.token);
+      localStorage.setItem("isLogged", "true");
       dispatch(setIsLogged(true));
       dispatch(
         setLoginData({
-          token: result.data.login.user,
+          token: result.data.login.token,
           ...result.data.login.user,
         })
       );
