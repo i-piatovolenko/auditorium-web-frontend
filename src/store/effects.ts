@@ -61,10 +61,10 @@ export const freeClassroomTC = (
         },
       },
     });
-    dispatch(fetchClassroomsTC);
     dispatch(freeClassroomAC(classroomName));
     dispatch(setDisabledButton(true));
     dispatch(setModalVisible(!closeWindow));
+    dispatch(fetchClassroomsTC);
   } catch (e) {
     console.log(e);
   }

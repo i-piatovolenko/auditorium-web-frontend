@@ -1,7 +1,7 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { setDisabledButton, setModalVisible } from "../../../../store/actions";
-import { freeClassroomTC, occupyClassroomTC } from "../../../../store/effects";
+import {setClassrooms, setDisabledButton, setModalVisible} from "../../../../store/actions";
+import {fetchClassroomsTC, freeClassroomTC, occupyClassroomTC} from "../../../../store/effects";
 import { Classroom } from "../../../../store/types";
 import { useMutation } from "@apollo/client";
 import { FREE_CLASSROOM, OCCUPY_CLASSROOM } from "../../../../api/mutations";
@@ -43,7 +43,7 @@ const PopupClassroomContainer: React.FC<WithRouterProps> = ({ match }) => {
     dispatch(setDisabledButton(true));
     history.goBack();
   };
-  const [freeClassroom] = useMutation(FREE_CLASSROOM);
+  const [freeClassroom, {loading, data, error}] = useMutation(FREE_CLASSROOM);
   const [occupyClassroom] = useMutation(OCCUPY_CLASSROOM);
   const onFreeClassroom = (closeWindow: boolean) => {
     dispatch(freeClassroomTC(name, freeClassroom, closeWindow));

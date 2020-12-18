@@ -1,7 +1,6 @@
 import React, {useEffect} from "react";
 import { Route, Switch } from "react-router-dom";
 import { Alert, Spin } from "antd";
-import ClassroomsGrid from "../../components/content/classrooms/ClassroomsPage";
 import Home from "../../components/content/home/HomeContainer";
 import Schedule from "../../components/content/schedule/Schedule";
 import Log from "../../components/content/register/Register";
@@ -10,7 +9,7 @@ import { LoadingOutlined } from "@ant-design/icons/lib";
 import Administration from "../../components/content/administration/Administration";
 import Settings from "../../components/content/settings/Settings";
 import Profile from "../../components/content/profile/Profile";
-import ClassroomsPage from "../../components/content/classrooms/ClassroomsPage";
+import ClassroomsPage from "../../components/content/classrooms/ClassroomsPageContainer";
 
 const antIcon = <LoadingOutlined style={{ fontSize: 24 }} spin />;
 
